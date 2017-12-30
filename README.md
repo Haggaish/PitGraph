@@ -24,5 +24,5 @@ This is a View Class, responsible for drawing the Pit line, and manages the touc
 it references a PointCollection object that holds the points for drawing
 Drawing is done directly on the canvas.
 
-![Architecture](/images/PitArchitecture.png)
+![Architecture](/images/PitArchitecture.png) 
 
