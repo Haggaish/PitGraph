@@ -31,7 +31,9 @@ public class PointCollection {
 
     // The point added in values relative to zero
     public void addPoint(PitPoint p){
-        mPoints.add(p.plus(mZero));
+        PitPoint revisedPoint = p.plus(mZero);
+        revisedPoint.setZero(mZero);
+        mPoints.add(revisedPoint);
     }
 
     public void setZero(PitPoint zero){
