@@ -9,15 +9,28 @@ import android.support.annotation.NonNull;
 
 public class PitPoint extends Point implements Comparable<PitPoint>{
 
+    private PitPoint zero = null;
+
     public PitPoint(){
         super(0,0);
     }
+
     public PitPoint(Point ref){
         super(ref);
     }
 
     public PitPoint(int x, int y){
         super(x,y);
+    }
+
+    public void setZero(PitPoint zero) {
+        this.zero = zero;
+    }
+
+    public PitPoint getNumericValue(){
+        PitPoint point = this.minus(zero);
+        point.y *= -1;
+        return point;
     }
 
 

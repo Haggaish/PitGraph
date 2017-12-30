@@ -23,11 +23,14 @@ public class PitView extends View {
 
 
     private PointCollection mPointCollection = new PointCollection();
-    private float ringRadius = 50.0f;
+    private float touchRange = 50.0f;
+    private float circleRadius = 20.0f;
+
 
     private Paint pointPaint = new Paint();
     private Paint linePaint = new Paint();
     private Paint axcesPaint = new Paint();
+    private Paint capturePaint = new Paint();
 
 
     public PitView(Context context) {
@@ -56,6 +59,12 @@ public class PitView extends View {
         axcesPaint.setStrokeWidth(3);
         axcesPaint.setStyle(Paint.Style.STROKE);
 
+        capturePaint.setColor(0xFF2780DD);
+        capturePaint.setStrokeWidth(1);
+        capturePaint.setStyle(Paint.Style.STROKE);
+        capturePaint.setTextSize(40);
+
+
         mPointCollection = new PointCollection();
 
         return;
@@ -73,7 +82,7 @@ public class PitView extends View {
         switch (e.getAction()) {
 
             case MotionEvent.ACTION_DOWN: {
-                if ((touchedPoint = mPointCollection.touched(eventPoint, ringRadius)) != null) {
+                if ((touchedPoint = mPointCollection.touched(eventPoint, touchRange)) != null) {
                     offset = eventPoint.minus(touchedPoint);
                     return true;
                 }
@@ -126,7 +135,9 @@ public class PitView extends View {
 
         List<PitPoint> list = mPointCollection.getList();
         for(PitPoint pitPoint : list){
-            canvas.drawCircle(pitPoint.x, pitPoint.y, ringRadius, pointPaint);
+            canvas.drawCircle(pitPoint.x, pitPoint.y, circleRadius, pointPaint);
+            PitPoint val = pitPoint.getNumericValue();
+            canvas.drawText(String.format("%d,%d",val.x,val.y), pitPoint.x-3*circleRadius, pitPoint.y+3*circleRadius, capturePaint);
         }
         canvas.drawPath( calculatePath(), linePaint);
 

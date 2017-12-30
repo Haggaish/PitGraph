@@ -39,6 +39,7 @@ public class PointCollection {
             PitPoint tmp = (mPoints.get(i).minus(mZero)).plus(zero);
             mPoints.get(i).x = tmp.x;
             mPoints.get(i).y = tmp.y;
+            mPoints.get(i).setZero(zero);
         }
         mZero = zero;
     }
