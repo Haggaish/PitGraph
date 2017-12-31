@@ -11,6 +11,11 @@ public class PitPoint extends Point implements Comparable<PitPoint>{
 
     private PitPoint zero = null;
 
+
+
+
+    private boolean  capturePosition = PointCollection.BELOW;  // ABOVE, Below
+
     public PitPoint(){
         super(0,0);
     }
@@ -30,7 +35,15 @@ public class PitPoint extends Point implements Comparable<PitPoint>{
     public PitPoint getNumericValue(){
         PitPoint point = this.minus(zero);
         point.y *= -1;
-        return point;
+       return point;
+    }
+
+    public void setCapturePosition(boolean capturePosition) {
+        this.capturePosition = capturePosition;
+    }
+
+    public boolean getCapturePosition() {
+        return capturePosition;
     }
 
 
@@ -47,7 +60,6 @@ public class PitPoint extends Point implements Comparable<PitPoint>{
     public int compareTo(@NonNull PitPoint p) {
         return p.x  - x;
     }
-
 
 
 }

@@ -137,7 +137,12 @@ public class PitView extends View {
         for(PitPoint pitPoint : list){
             canvas.drawCircle(pitPoint.x, pitPoint.y, circleRadius, pointPaint);
             PitPoint val = pitPoint.getNumericValue();
-            canvas.drawText(String.format("%d,%d",val.x,val.y), pitPoint.x-3*circleRadius, pitPoint.y+3*circleRadius, capturePaint);
+
+            if(pitPoint.getCapturePosition() == PointCollection.BELOW){
+                canvas.drawText(String.format("%d,%d",val.x,val.y), pitPoint.x-3*circleRadius, pitPoint.y+3*circleRadius, capturePaint);
+            } else {
+                canvas.drawText(String.format("%d,%d",val.x,val.y), pitPoint.x-3*circleRadius, pitPoint.y-3*circleRadius, capturePaint);
+            }
         }
         canvas.drawPath( calculatePath(), linePaint);
 

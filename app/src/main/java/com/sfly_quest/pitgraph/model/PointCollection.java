@@ -51,9 +51,25 @@ public class PointCollection {
 
 
 
-    // This routine fetch the points in terms of the
+    public static final boolean ABOVE = true;
+    public static final boolean BELOW = false;
+    
     public List<PitPoint> getList(){
         Collections.sort(mPoints);
+        if(mPoints.size() < 2)
+            return mPoints;
+        for(int i=0 ; i<mPoints.size() ; ++i){
+            if(i == 0){
+                mPoints.get(i).setCapturePosition( mPoints.get(i).y <   mPoints.get(i+1).y ? ABOVE : BELOW );
+            }
+            else if(i == mPoints.size()-1){
+                mPoints.get(i).setCapturePosition( mPoints.get(i).y <   mPoints.get(i-1).y ? ABOVE : BELOW );
+            } else {
+                mPoints.get(i).setCapturePosition(
+                        mPoints.get(i).y <   mPoints.get(i-1).y &&
+                        mPoints.get(i).y <   mPoints.get(i+1).y ? ABOVE : BELOW );
+            }
+        }
         return mPoints;
     }
 
