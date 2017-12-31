@@ -1,6 +1,7 @@
 # PitGraph
 
 This project is an excersize project to the specifications listed [here](https://github.com/HendrixString/sfly-quest)
+I had a lot of fun doing this excersise, so I added many bells and whistles that were not part of the specification.
 
 ## Concept
 The guidence to this excersize suggested to implement Pit as a ViewGroup, anf the points as View, and let Pit hold them.
