@@ -22,7 +22,7 @@ public class PitView extends View {
 
 
 
-    private PointCollection mPointCollection = new PointCollection();
+    private PointCollection pointCollection = new PointCollection();
     private float touchRange = 50.0f;
     private float circleRadius = 20.0f;
 
@@ -44,7 +44,7 @@ public class PitView extends View {
     }
 
     public void addPoint(PitPoint pitPoint){
-        mPointCollection.addPoint(pitPoint);
+        pointCollection.addPoint(pitPoint);
     }
     private void init(Context context){
         pointPaint.setColor(  0xffff0000);
@@ -65,7 +65,7 @@ public class PitView extends View {
         capturePaint.setTextSize(40);
 
 
-        mPointCollection = new PointCollection();
+        pointCollection = new PointCollection();
 
         return;
     }
@@ -82,7 +82,7 @@ public class PitView extends View {
         switch (e.getAction()) {
 
             case MotionEvent.ACTION_DOWN: {
-                if ((touchedPoint = mPointCollection.touched(eventPoint, touchRange)) != null) {
+                if ((touchedPoint = pointCollection.touched(eventPoint, touchRange)) != null) {
                     offset = eventPoint.minus(touchedPoint);
                     return true;
                 }
@@ -123,7 +123,7 @@ public class PitView extends View {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = MeasureSpec.getSize(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
-        mPointCollection.setZero(new PitPoint(width/2, height/2));
+        pointCollection.setZero(new PitPoint(width/2, height/2));
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
@@ -133,7 +133,7 @@ public class PitView extends View {
 
         drawAxces(canvas);
 
-        List<PitPoint> list = mPointCollection.getList();
+        List<PitPoint> list = pointCollection.getList();
         for(PitPoint pitPoint : list){
             canvas.drawCircle(pitPoint.x, pitPoint.y, circleRadius, pointPaint);
             PitPoint val = pitPoint.getNumericValue();
@@ -149,16 +149,16 @@ public class PitView extends View {
     }
 
     private void drawAxces(Canvas canvas) {
-        canvas.drawLine(mPointCollection.getZero().x, 0,
-                mPointCollection.getZero().x,mPointCollection.getZero().y * 2,
+        canvas.drawLine(pointCollection.getZero().x, 0,
+                pointCollection.getZero().x, pointCollection.getZero().y * 2,
                 axcesPaint);
-        canvas.drawLine(0, mPointCollection.getZero().y,
-                mPointCollection.getZero().x * 2,mPointCollection.getZero().y ,
+        canvas.drawLine(0, pointCollection.getZero().y,
+                pointCollection.getZero().x * 2, pointCollection.getZero().y ,
                 axcesPaint);
     }
 
     private Path calculatePath(){
-        List<PitPoint> list = mPointCollection.getList();
+        List<PitPoint> list = pointCollection.getList();
         Path path = new Path();
         path.reset();
 

@@ -8,23 +8,23 @@ import com.sfly_quest.pitgraph.model.PitPoint;
 
 public class MainActivity extends AppCompatActivity {
 
-    private PitView mPitView ;
+    private PitView pitView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPitView = (PitView)findViewById(R.id.thePitView);
+        pitView = (PitView)findViewById(R.id.thePitView);
 
-        mPitView.addPoint(new PitPoint(-300,150));
-        mPitView.addPoint(new PitPoint(-450,-150));
-        mPitView.addPoint(new PitPoint(0,0));
-        mPitView.addPoint(new PitPoint(300,150));
-        mPitView.addPoint(new PitPoint(450,-150));
+        pitView.addPoint(new PitPoint(-300,150));
+        pitView.addPoint(new PitPoint(-450,-150));
+        pitView.addPoint(new PitPoint(0,0));
+        pitView.addPoint(new PitPoint(300,150));
+        pitView.addPoint(new PitPoint(450,-150));
     }
 
     public void addPointInCenter(View view) {
-        mPitView.addPoint(new PitPoint(0,0));
-        mPitView.invalidate();
+        pitView.addPoint(new PitPoint(0,0));
+        pitView.invalidate();
     }
 }

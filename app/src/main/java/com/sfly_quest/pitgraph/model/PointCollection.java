@@ -14,39 +14,39 @@ public class PointCollection {
 
 
     // point are held in values relative to the display.
-    private List<PitPoint> mPoints ;
+    private List<PitPoint> points;
 
     // This is the model zero point in terms of the display
-    private PitPoint  mZero = new PitPoint(0,0);
+    private PitPoint zero = new PitPoint(0,0);
 
 
     public PointCollection(){
-        mPoints = new ArrayList<PitPoint>() ;
+        points = new ArrayList<PitPoint>() ;
     }
 
     public PointCollection(List<PitPoint> list){
-        mPoints = list;
+        points = list;
     }
 
 
     // The point added in values relative to zero
     public void addPoint(PitPoint p){
-        PitPoint revisedPoint = p.plus(mZero);
-        revisedPoint.setZero(mZero);
-        mPoints.add(revisedPoint);
+        PitPoint revisedPoint = p.plus(zero);
+        revisedPoint.setZero(zero);
+        points.add(revisedPoint);
     }
 
     public void setZero(PitPoint zero){
-        for(int i = 0; i< mPoints.size() ; ++i){
-            PitPoint tmp = (mPoints.get(i).minus(mZero)).plus(zero);
-            mPoints.get(i).x = tmp.x;
-            mPoints.get(i).y = tmp.y;
-            mPoints.get(i).setZero(zero);
+        for(int i = 0; i< points.size() ; ++i){
+            PitPoint tmp = (points.get(i).minus(this.zero)).plus(zero);
+            points.get(i).x = tmp.x;
+            points.get(i).y = tmp.y;
+            points.get(i).setZero(zero);
         }
-        mZero = zero;
+        this.zero = zero;
     }
     public PitPoint getZero(){
-        return mZero;
+        return zero;
     }
 
 
@@ -55,28 +55,28 @@ public class PointCollection {
     public static final boolean BELOW = false;
     
     public List<PitPoint> getList(){
-        Collections.sort(mPoints);
-        if(mPoints.size() < 2)
-            return mPoints;
-        for(int i=0 ; i<mPoints.size() ; ++i){
+        Collections.sort(points);
+        if(points.size() < 2)
+            return points;
+        for(int i = 0; i< points.size() ; ++i){
             if(i == 0){
-                mPoints.get(i).setCapturePosition( mPoints.get(i).y <   mPoints.get(i+1).y ? ABOVE : BELOW );
+                points.get(i).setCapturePosition( points.get(i).y <   points.get(i+1).y ? ABOVE : BELOW );
             }
-            else if(i == mPoints.size()-1){
-                mPoints.get(i).setCapturePosition( mPoints.get(i).y <   mPoints.get(i-1).y ? ABOVE : BELOW );
+            else if(i == points.size()-1){
+                points.get(i).setCapturePosition( points.get(i).y <   points.get(i-1).y ? ABOVE : BELOW );
             } else {
-                mPoints.get(i).setCapturePosition(
-                        mPoints.get(i).y <   mPoints.get(i-1).y &&
-                        mPoints.get(i).y <   mPoints.get(i+1).y ? ABOVE : BELOW );
+                points.get(i).setCapturePosition(
+                        points.get(i).y <   points.get(i-1).y &&
+                        points.get(i).y <   points.get(i+1).y ? ABOVE : BELOW );
             }
         }
-        return mPoints;
+        return points;
     }
 
 
     public PitPoint touched(Point touchPoint, double dist){
 
-        for(PitPoint point : mPoints){
+        for(PitPoint point : points){
             if( Math.abs(touchPoint.x - point.x) < dist  &&    Math.abs(touchPoint.y - point.y) < dist )
                 return point ;
         }
